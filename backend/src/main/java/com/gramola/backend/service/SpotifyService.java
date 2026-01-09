@@ -21,10 +21,11 @@ public class SpotifyService {
     @Autowired
     private RestTemplate restTemplate;
 
+    // --- CORRECCIÓN: URLs REALES DE SPOTIFY ---
     private final String TOKEN_URL = "https://accounts.spotify.com/api/token";
     private final String SEARCH_URL = "https://api.spotify.com/v1/search?q={query}&type=track&limit=10";
 
-    // 1. Conseguir el Token (La llave)
+    // 1. Conseguir el Token
     public String getAccessToken(String clientId, String clientSecret) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -44,11 +45,12 @@ public class SpotifyService {
             }
         } catch (Exception e) {
             System.err.println("Error obteniendo token: " + e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
 
-    // 2. Buscar Canciones (La acción)
+    // 2. Buscar Canciones
     public List<Map<String, Object>> searchTracks(String query, String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
@@ -58,7 +60,6 @@ public class SpotifyService {
             // Hacemos la petición GET a la API de búsqueda
             ResponseEntity<Map> response = restTemplate.exchange(SEARCH_URL, HttpMethod.GET, entity, Map.class, query);
             
-            // Navegamos por el JSON de respuesta de Spotify para sacar solo lo que nos interesa
             Map<String, Object> body = response.getBody();
             if (body != null && body.containsKey("tracks")) {
                 Map<String, Object> tracks = (Map<String, Object>) body.get("tracks");
@@ -66,6 +67,7 @@ public class SpotifyService {
             }
         } catch (Exception e) {
             System.err.println("Error buscando canciones: " + e.getMessage());
+            e.printStackTrace();
         }
         return Collections.emptyList();
     }
