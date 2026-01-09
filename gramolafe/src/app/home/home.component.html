@@ -1,0 +1,38 @@
+<div style="padding: 20px; font-family: sans-serif; max-width: 800px; margin: 0 auto;">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>🎵 Gramola de {{ usuario.bar }}</h1>
+    <button (click)="logout()" style="background: #dc3545; color: white; border: none; padding: 8px 15px; cursor: pointer;">
+      Salir
+    </button>
+  </div>
+
+  <div style="margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 10px;">
+    <input type="text" [(ngModel)]="busqueda" placeholder="Buscar canción o artista..." 
+           style="width: 70%; padding: 10px; font-size: 16px;">
+    
+    <button (click)="buscar()" style="width: 25%; padding: 10px; font-size: 16px; background: #1db954; color: white; border: none; cursor: pointer; margin-left: 2%;">
+      Buscar 🔎
+    </button>
+  </div>
+
+  <div style="margin-top: 30px;">
+    <h3 *ngIf="canciones.length > 0">Resultados:</h3>
+    
+    <div *ngFor="let track of canciones" style="display: flex; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+      <img *ngIf="track.album.images[0]" [src]="track.album.images[0].url" width="60" height="60" style="margin-right: 15px; border-radius: 4px;">
+      
+      <div>
+        <div style="font-weight: bold; font-size: 1.1em;">{{ track.name }}</div>
+        <div style="color: #666;">{{ track.artists[0].name }} - {{ track.album.name }}</div>
+      </div>
+      
+      <div style="margin-left: auto;">
+        <button style="background: #333; color: white; border: none; padding: 5px 10px; border-radius: 20px; cursor: pointer;">
+          Añadir +
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

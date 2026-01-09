@@ -19,11 +19,14 @@ export class LoginComponent {
 
   constructor(private service: UserService, private router: Router) {}
 
-  entrar() {
+entrar() {
     this.service.login(this.email, this.pwd).subscribe({
       next: (usuario) => {
         this.mensaje = '¡Login correcto!';
-        // Redirigir a Home
+        
+        // --- LÍNEA NUEVA OBLIGATORIA: Guardamos al usuario en memoria ---
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+        
         this.router.navigate(['/home']);
       },
       error: (error) => {

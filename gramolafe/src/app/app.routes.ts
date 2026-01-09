@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component'; // Este lo renombraste
-import { RegisterComponent } from './register/register.component'; // Este también
-import { HomeComponent } from './home/home'; // <--- ESTE ES EL NUEVO (sin .component)
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component'; // <--- Todo uniforme
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },

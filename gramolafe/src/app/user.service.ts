@@ -22,9 +22,22 @@ export class UserService {
     return this.http.post<any>(this.apiUrl + '/register', info);
   }
 
-  // --- NUEVO MÉTODO ---
+
+  // ... resto del código igual ...
+
   login(email: string, pwd: string) {
     let info = { email: email, pwd: pwd };
     return this.http.post<any>(this.apiUrl + '/login', info);
+  }
+
+  // --- NUEVO MÉTODO DE BÚSQUEDA ---
+  search(query: string, user: any) {
+    let info = {
+      email: user.email,
+      query: query,
+      clientId: user.clientId,
+      clientSecret: user.clientSecret
+    };
+    return this.http.post<any>(this.apiUrl + '/search', info);
   }
 }
