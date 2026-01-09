@@ -5,13 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  // La URL de tu backend Java (puerto 8080)
-  private apiUrl = 'http://localhost:8080/users/register';
+  // Base URL
+  private apiUrl = 'http://localhost:8080/users';
 
   constructor(private http: HttpClient) {}
 
   register(bar: string, email: string, pwd1: string, pwd2: string, clientId: string, clientSecret: string) {
-    // Empaquetamos los datos en un objeto JSON
     let info = {
       bar: bar,
       email: email,
@@ -20,8 +19,12 @@ export class UserService {
       clientId: clientId,
       clientSecret: clientSecret
     };
-    
-    // Enviamos el paquete a Java con una petición POST
-    return this.http.post<any>(this.apiUrl, info);
+    return this.http.post<any>(this.apiUrl + '/register', info);
+  }
+
+  // --- NUEVO MÉTODO ---
+  login(email: string, pwd: string) {
+    let info = { email: email, pwd: pwd };
+    return this.http.post<any>(this.apiUrl + '/login', info);
   }
 }

@@ -1,0 +1,20 @@
+<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-family: sans-serif;">
+  <h2>Iniciar Sesión</h2>
+  
+  <input type="email" [(ngModel)]="email" placeholder="Email" style="width: 90%; padding: 10px; margin: 10px 0;">
+  <br>
+  <input type="password" [(ngModel)]="pwd" placeholder="Contraseña" style="width: 90%; padding: 10px; margin: 10px 0;">
+  <br>
+
+  <button (click)="entrar()" style="width: 95%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; font-size: 16px;">
+    Entrar
+  </button>
+  
+  <p style="margin-top: 15px;">
+    ¿No tienes cuenta? <a (click)="irARegistro()" style="color: blue; cursor: pointer; text-decoration: underline;">Regístrate aquí</a>
+  </p>
+
+  <p *ngIf="mensaje" [style.color]="mensaje.includes('Error') ? 'red' : 'green'">
+    {{ mensaje }}
+  </p>
+</div>
