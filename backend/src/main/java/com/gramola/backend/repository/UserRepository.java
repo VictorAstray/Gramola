@@ -7,5 +7,6 @@ import com.gramola.backend.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
-    // Aquí podremos añadir métodos extra si los necesitamos
+    // Spring Data crea esta consulta automáticamente por el nombre del método
+    User findByEmailAndPwd(String email, String pwd);
 }
